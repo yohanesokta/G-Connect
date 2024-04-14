@@ -36,7 +36,7 @@ const Sidebar = ({ data, kelas }) => {
   }
 
   listKelas.current = kelas?.map((e, i) => {
-    return <ClassRender key={i} name={e.name} desc={e.desc} time='2 - 10 - 2024' />
+    return <ClassRender key={i} data={e} />
   })
   return (
     <div className='sidebar'>

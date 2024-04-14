@@ -3,8 +3,10 @@ import { HeaderUpdater } from "../../HeaderUpdater"
 import Sidebar from "./components/Sidebar/Sidebar.jsx"
 import "./style/page.css"
 import axios from "axios"
+import MainPage from "./components/Main/MainPage.jsx"
+import { useSelector } from "react-redux"
 const ChatsPage = () => {
-
+  const kelasRedux = useSelector((state) => state.class);
   const [user, setUser] = useState(null)
   const [Kelas, SetKelas] = useState()
   const executeRef = useRef(false)
@@ -14,6 +16,8 @@ const ChatsPage = () => {
       checkIsLogin()
     }
   }, [])
+
+
   const checkIsLogin = async () => {
     try {
       const URL = import.meta.env.VITE_ORIGIN_SERVER
@@ -52,8 +56,7 @@ const ChatsPage = () => {
       </aside>
 
       <div className="main">
-
-
+        {(kelasRedux.active) ? <MainPage data={kelasRedux.list} /> : null}
       </div>
     </div>
   </>
