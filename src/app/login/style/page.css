@@ -68,8 +68,7 @@
     width: 100%;
 }
 form nav i {
-    padding: 10px 11px;
-    transform: rotate(180deg);
+    padding: 12px 11px;
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 50%;
     font-weight: 200;
@@ -91,7 +90,7 @@ form nav .login a {
     border: 0.2px solid rgb(134, 134, 134);
     border-radius: 5px;
 }
-form input {
+form > input {
     transition: 0.2s;
     color: white;
     padding: 15px;
@@ -121,4 +120,23 @@ form button:hover {
 form button:active {
     background-color: white;
     color: black;
+}
+form .psw {
+    width: 100%;
+    display: flex;
+    border: 1px solid rgb(176, 176, 176);
+    border-radius: 5px;
+}
+form .psw input {
+    flex: 1;
+    border: none;
+    width: auto;
+}
+form .psw input:focus {
+    border: none;
+    box-shadow: none;
+}
+form .psw i {
+    padding: 14px 20px 5px 10px;
+    cursor: pointer;
 }

@@ -116,6 +116,7 @@
 }
 .sidebar .profile {
     width: 100%;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     height: 126px;
@@ -181,3 +182,40 @@
     opacity: 0.5;
     color: black;
 }
+.loader {
+    width: 100%;
+    height: 100%;
+    background-color: red;
+
+    background: var(--color-dark-secondary);
+    background-image: -webkit-linear-gradient(
+        left,
+        var(--color-dark-secondary) 0px,
+        #737373 100px,
+        var(--color-dark-secondary) 80px
+    );
+    background-image: -o-linear-gradient(
+        left,
+        var(--color-dark-secondary) 0px,
+        #737373 100px,
+        var(--color-dark-secondary) 80px
+    );
+    background-image: linear-gradient(
+        90deg,
+        var(--color-dark-secondary) 0px,
+        #737373 100px,
+        var(--color-dark-secondary) 80px
+    );
+    border-radius: 10px;
+    -webkit-animation: shine-loading-container-items 0.5s infinite ease-in-out;
+    animation: shine-loading-container-items 0.5s infinite ease-in;
+}
+@keyframes shine-loading-container-items {
+    0% {
+        background-position: -100px;
+    }
+    100% {
+        background-position: 168px;
+    }
+}
+/* background-position: -100px; */
