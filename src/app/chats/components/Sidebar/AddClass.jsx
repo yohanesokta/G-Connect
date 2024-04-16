@@ -9,6 +9,8 @@ const AddClassComponents = ({ control }) => {
   const button_tambah_kelas = useRef()
   const create_info = useRef()
   const join_code = useRef()
+  const join_info = useRef()
+  const join_button = useRef()
 
   const session = sessionStorage.getItem('_token');
   const URL = import.meta.env.VITE_ORIGIN_SERVER
@@ -47,6 +49,35 @@ const AddClassComponents = ({ control }) => {
     }
   }
 
+  // join class
+
+  const join_class = async () => {
+    if (TrimsChecker(join_code.current.value)) {
+      join_info.current.innerHTML = "kosong terusssssssss 😠"
+      return;
+    }
+    join_button.current.innerHTML = "Please Wait"
+    join_button.current.disable = true
+    try {
+      const token = await token_refresher()
+      const { data } = await axios.post(URL + "/class/join", {}, {
+        headers: {
+          authorization: `Barrier ${token}`,
+          session,
+          code: join_code.current.value
+        }
+      })
+      if (data.success == 1) {
+        window.location.reload()
+      }
+    } catch (_) {
+      if (_.response) {
+        join_info.current.innerHTML = _.response.data.message
+        join_button.current.innerHTML = "Join Kelas"
+      }
+    }
+  }
+
   return (<div className="container-add-class">
     <div className="closer" onClick={control}></div>
     <div className="add-class">
@@ -63,10 +94,10 @@ const AddClassComponents = ({ control }) => {
       <div className="join">
         <div className="join-container">
           <h4>Join Kelas</h4>
-          <input type="text" name='join-kelas-code' placeholder='kode kelas' />
-          {/* <p>gagal menambahkan</p> */}
+          <input type="text" ref={join_code} name='join-kelas-code' placeholder='kode kelas' />
+          <p ref={join_info}></p>
           <div className="button">
-            <button>Join Kelas</button>
+            <button ref={join_button} onClick={join_class}>Join Kelas</button>
           </div>
         </div>
       </div>

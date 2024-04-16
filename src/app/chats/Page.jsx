@@ -5,6 +5,7 @@ import "./style/page.css"
 import axios from "axios"
 import MainPage from "./components/Main/MainPage.jsx"
 import { useSelector } from "react-redux"
+import { getDateOnline } from "../store/dates.js"
 const ChatsPage = () => {
   const kelasRedux = useSelector((state) => state.class);
   const [user, setUser] = useState(null)
@@ -14,6 +15,12 @@ const ChatsPage = () => {
     if (!executeRef.current) {
       executeRef.current = true
       checkIsLogin()
+      const now = new Date
+      console.log("NOW : ", now.toTimeString())
+      const date = getDateOnline().then(e => {
+
+        const online = new Date(e)
+      })
     }
   }, [])
 

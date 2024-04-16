@@ -103,6 +103,10 @@ form input:focus {
     border: 1px solid white;
     box-shadow: 1px 0 10px gray;
 }
+form input:-webkit-autofill {
+    -webkit-text-fill-color: rgb(17, 253, 52);
+    -webkit-box-shadow: 0 0 0 30px #171617 inset; /* Ubah warna latar belakang */
+}
 form button {
     padding: 15px 0;
     background-color: #393ec6;
