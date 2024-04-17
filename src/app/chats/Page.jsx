@@ -15,12 +15,6 @@ const ChatsPage = () => {
     if (!executeRef.current) {
       executeRef.current = true
       checkIsLogin()
-      const now = new Date
-      console.log("NOW : ", now.toTimeString())
-      const date = getDateOnline().then(e => {
-
-        const online = new Date(e)
-      })
     }
   }, [])
 
@@ -47,6 +41,7 @@ const ChatsPage = () => {
         }
       })
       SetKelas(kelas.data.data)
+      sessionStorage.setItem('user', result.data.data.sub_id)
       setUser(result.data.data)
     } catch (error) {
       if (error.response || error.code == "ERR_NETWORK") {
