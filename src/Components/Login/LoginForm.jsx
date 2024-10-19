@@ -20,7 +20,7 @@ function LoginComponent() {
 function OtpComponent() {
     return (<>
         <form action="" data-bs-theme="dark">
-            <h3 className="text-light text-center p-4">Masuk</h3>
+            <h3 className="text-light text-center p-4">Masuk ( OTP )</h3>
             <div class="input-group gap-2 mb-3">
                 <input type="tel" class="text-center form-control" aria-label="Username" aria-describedby="basic-addon1"></input>
             </div>
