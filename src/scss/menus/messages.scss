@@ -2,12 +2,21 @@
     width: 100%;
     display: flex;
     .message-col {
-        max-width: 60%;
+        max-width: 50%;
         padding: 5px 10px;
         text-wrap: wrap;
         margin: 10px;
+        display: flex;
+        flex-direction: column;
         border-radius: 0 10px 10px 10px;
         background-color: rgb(18, 87, 18);
+        img {
+            width: 100%;
+            border-radius: 10px;
+            object-fit: cover;
+            max-height: 400px;
+            margin: 0 auto;
+        }
         .message {
             color: white;
             .time {
@@ -30,4 +39,7 @@
     .message-col {
         border-radius: 10px 10px 0 10px;
     }
+}
+.imageM {
+    width: 40%;
 }
