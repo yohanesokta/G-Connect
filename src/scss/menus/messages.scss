@@ -1,0 +1,33 @@
+.base-message {
+    width: 100%;
+    display: flex;
+    .message-col {
+        max-width: 60%;
+        padding: 5px 10px;
+        text-wrap: wrap;
+        margin: 10px;
+        border-radius: 0 10px 10px 10px;
+        background-color: rgb(18, 87, 18);
+        .message {
+            color: white;
+            .time {
+                .block {
+                    flex: 1;
+                }
+                span {
+                    font-size: 10px;
+                }
+                display: flex;
+            }
+        }
+    }
+}
+.fromMe::before {
+    content: "";
+    flex: 1;
+}
+.fromMe {
+    .message-col {
+        border-radius: 10px 10px 0 10px;
+    }
+}
