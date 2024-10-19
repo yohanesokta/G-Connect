@@ -37,7 +37,7 @@ function Login() {
 
     return (
         <>
-            <div className="container">
+            <div className="canvas">
                 <div className="page">
                     <LoginComponent />
                     <p className="m-4 text-center text-secondary">Product Yohanes Oktanio 2024</p>

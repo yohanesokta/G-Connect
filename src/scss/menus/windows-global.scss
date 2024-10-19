@@ -1,0 +1,35 @@
+.globalWindowChat {
+    width: 100%;
+    display: flex;
+    height: 100vh;
+    background-color: rgb(14, 14, 14);
+    .window-chat {
+        margin: auto;
+        width: 93%;
+        border-radius: 10px;
+        height: 93%;
+        display: flex;
+        overflow: hidden;
+        background: rgb(7, 18, 19);
+        background: linear-gradient(
+            138deg,
+            rgba(7, 18, 19, 1) 0%,
+            rgba(14, 34, 34, 1) 12%,
+            rgba(29, 40, 36, 1) 40%,
+            rgb(22, 35, 23) 61%,
+            rgba(7, 18, 19, 1) 82%,
+            rgba(7, 18, 19, 1) 100%
+        );
+        box-shadow: 0 0 5px rgba(255, 255, 255, 0.516);
+        .base-chat {
+            flex: 1;
+            display: flex;
+            button {
+                outline: none;
+                border: none;
+                padding: 0 3px;
+                background-color: rgba(128, 128, 128, 0.46);
+            }
+        }
+    }
+}
