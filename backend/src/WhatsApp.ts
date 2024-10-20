@@ -30,7 +30,6 @@ async function connectToWhatsApp() {
         }
     });
     sock.ev.on("messages.upsert", async (m) => {
-        console.log(JSON.stringify(m, undefined, 2));
         const messages = m.messages[0];
     });
     sock.ev.on("creds.update", saveCreds);

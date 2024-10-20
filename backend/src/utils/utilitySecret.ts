@@ -6,5 +6,10 @@ function generateOTP(length) {
     }
     return result;
 }
+function generateUserId() {
+    const timestamp = Date.now();
+    const randomNum = Math.floor(Math.random() * 10000);
+    return `user_${timestamp}_${randomNum}`;
+}
 
-export { generateOTP };
+export { generateOTP, generateUserId };
