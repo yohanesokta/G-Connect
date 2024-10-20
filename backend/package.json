@@ -2,16 +2,21 @@
     "name": "backend",
     "version": "1.0.0",
     "main": "index.js",
+    "license": "MIT",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "dev": "nodemon"
     },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "description": "",
-    "dependencies": {
-        "dotenv": "^16.4.5",
+    "devDependencies": {
         "nodemon": "^3.1.7",
-        "postgres": "^3.4.4"
+        "tsc": "^2.0.4",
+        "typescript": "^5.6.3"
+    },
+    "dependencies": {
+        "@whiskeysockets/baileys": "^6.7.8",
+        "baileys": "github:WhiskeySockets/Baileys",
+        "dotenv": "^16.4.5",
+        "express": "^4.21.1",
+        "postgres": "^3.4.4",
+        "qrcode-terminal": "^0.12.0"
     }
 }
