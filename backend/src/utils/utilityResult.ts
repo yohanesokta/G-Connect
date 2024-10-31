@@ -10,4 +10,13 @@ function responseJson({ data = "", status, message = "" }) {
         },
     };
 }
-export { sendMessageOtp, responseJson };
+
+function generateDate(up = 0) {
+    const timestamp = Date.now();
+    return Math.floor(timestamp / 1000) + up;
+}
+
+function ValidationVerif(){
+    
+}
+export { sendMessageOtp, responseJson, generateDate };
