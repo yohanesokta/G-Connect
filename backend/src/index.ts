@@ -11,6 +11,7 @@ import "dotenv/config";
 import {
     checkAvailabeNumber,
     generateUserLogin,
+    jwtUser,
     otpValidation,
     schema,
 } from "./utils/model";
@@ -45,7 +46,11 @@ app.post("/auth/verif", async (req, res) => {
     const headOtp = req.header("otp");
     const validation = await otpValidation(headNumber, headOtp);
     if (validation) {
-        res.status(200).json(responseJson({ status: 200, message: "Ok" }));
+        const payload = await jwtUser(headNumber);
+        const secret = process.env.JWT_TOKEN_SECRET!
+        const token = jwt.sign(payload,secret,{expiresIn:"1h"})
+        const refresh_token = jwt.sign(payload,secret,{expiresIn:"60d"})
+        res.status(200).json(responseJson({ status: 200, message: "Ok",data:{refresh_token} }));
     } else {
         res.status(401).json(
             responseJson({ status: 401, message: "Unauthorized" })

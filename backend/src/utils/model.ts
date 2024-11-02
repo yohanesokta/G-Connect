@@ -20,6 +20,12 @@ async function schema() {
     )`;
 }
 
+async function  jwtUser(number) {
+    const data = await sql`SELECT "user_number","user_name","user_createAt" from userdata WHERE "user_number"=${number}`
+    return data[0]
+}
+
+
 async function checkAvailabeNumber(number) {
     const data =
         await sql`SELECT * FROM userdata WHERE "user_number" = ${number} `;
@@ -30,8 +36,8 @@ async function otpValidation(number, otp) {
     const data =
         await sql`SELECT "user_lastOTP" FROM userdata WHERE "user_number" = ${number}`;
 
-    const otpCode = String(data[0].user_lastOTP).split(".")[0];
-    const dateCode = String(data[0].user_lastOTP).split(".")[1];
+    const otpCode = String(data[0]?.user_lastOTP).split(".")[0];
+    const dateCode = String(data[0]?.user_lastOTP).split(".")[1];
     if (otpCode == otp) {
         if (parseInt(dateCode) >= generateDate()) {
             await sql`UPDATE userdata SET "user_lastOTP"=${"0.0"} WHERE "user_number" = ${number}`;
@@ -56,4 +62,5 @@ async function generateUserLogin({ number, otp, timestamp }) {
     }
 }
 
-export { schema, checkAvailabeNumber, generateUserLogin, otpValidation };
+
+export { schema, checkAvailabeNumber, generateUserLogin, otpValidation , jwtUser };
