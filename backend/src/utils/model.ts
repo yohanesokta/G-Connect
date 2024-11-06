@@ -21,7 +21,7 @@ async function schema() {
 }
 
 async function  jwtUser(number) {
-    const data = await sql`SELECT "user_number","user_name","user_createAt" from userdata WHERE "user_number"=${number}`
+    const data = await sql`SELECT "user_id","user_number","user_name","user_createAt" from userdata WHERE "user_number"=${number}`
     return data[0]
 }
 

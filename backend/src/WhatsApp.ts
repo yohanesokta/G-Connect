@@ -36,8 +36,12 @@ async function connectToWhatsApp() {
     Connection = sock;
 }
 
-function messagesSender(number, text) {
-    Connection?.sendMessage(`${number}@s.whatsapp.net`, { text });
+async function messagesSender(number, text) {
+    try {
+        await Connection?.sendMessage(`${number}@s.whatsapp.net`, { text });
+    }catch(error){
+        console.error("Error Execution : ", error)
+    }
 }
 
 export { connectToWhatsApp, messagesSender };
