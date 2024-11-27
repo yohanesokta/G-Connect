@@ -2,6 +2,7 @@ import express from "express";
 import { connectToWhatsApp, messagesSender } from "./WhatsApp";
 import { generateOTP } from "./utils/utilitySecret";
 import cookieParser from "cookie-parser"
+import cors from "cors"
 import {
     generateDate,
     responseJson,
@@ -20,6 +21,14 @@ import {
 const jwtSecret = process.env.JWT_TOKEN_SECRET!
 const app = express();
 app.use(cookieParser());
+app.use(cors(
+    {
+        origin:"http://localhost:5173",
+        credentials:true,
+    }
+))
+app.use(express.json())
+app.use(express.urlencoded({extended : true}))
 connectToWhatsApp();
 
 //  Send Schema Model Create
@@ -32,7 +41,7 @@ app.get("/", (_, __) => {
 
 const JWTVerification = (req,res,next)=>{
     const cookie = req.cookies.token_refresh
-    console.log({data: cookie})
+    console.log(req.cookies )
     jwt.verify(cookie,jwtSecret,(error,decoded)=>{
         if (error) {
             res.status(401).json(responseJson({status:"401",message:"Unauthorized"}))
@@ -44,7 +53,7 @@ const JWTVerification = (req,res,next)=>{
 
 // Auth Login Function
 app.post("/auth/login", (req, res) => {
-    const number = req.header("number");
+    const number = req.body["number"]
     const otp = generateOTP(6);
     generateUserLogin({
         number,
@@ -59,8 +68,9 @@ app.post("/auth/login", (req, res) => {
 
 // Auth Verif Function
 app.post("/auth/verif", async (req, res) => {
-    const headNumber = req.header("number");
-    const headOtp = req.header("otp");
+    const headNumber = req.body["number"];
+    const headOtp = req.body["otp"];
+    console.log(headNumber,headOtp)
     const validation = await otpValidation(headNumber, headOtp);
     if (validation) {
         const payload = await jwtUser(headNumber);
@@ -68,7 +78,7 @@ app.post("/auth/verif", async (req, res) => {
         const refresh_token = jwt.sign(payload,jwtSecret,{expiresIn:"60d"})
 
 
-        res.cookie("token_refresh",token)
+        res.cookie("token_refresh",token,{httpOnly:true,sameSite:"none",secure:true,maxAge:Date.now() + 24 * 60 * 60 * 1000})
         res.status(200).json(responseJson({ status: 200, message: "Ok",data:{refresh_token} }));
     } else {
         res.status(401).json(
@@ -87,6 +97,7 @@ app.post('/signout',JWTVerification,(req,res)=>{
     res.clearCookie("token_refresh")
     res.status(200).json(responseJson({status:200,message:"success sign-out"}))
 })
+
 app.listen(4000, () => {
     console.log("Listened 4000");
 });
